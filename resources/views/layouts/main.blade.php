@@ -6,11 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="/resources/css/main.css">
-    <title>Document</title>
+    <title>Fraja</title>
     @vite('resources/css/app.css')
+    @livewireStyles
 </head>
 
 <body class="font-sans bg-gray-900 text-white">
+
+    <!-- Toggle dark and light mode
+    <label class="inline-flex items-center cursor-pointer">
+        <input type="checkbox" value="" class="sr-only peer">
+        <div
+            class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
+        </div>
+        <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">Switch</span>
+    </label>
+-->
+
     <nav class="border-b border-gray-800">
         <div class="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between px-4 py-6">
             <ul class="flex flex-col md:flex-row items-center">
@@ -34,21 +46,7 @@
                 </li>
             </ul>
             <div class="flex flex-col md:flex-row items-center">
-                <div class="relative mt-3 md:mt-0">
-                    <input type="text"
-                        class="bg-gray-800 text-sm rounded-full w-64 px-4 pl-2 py-1 focus:outline-none focus:shadow-outline"
-                        placeholder="Search">
-                    <!--
-                    <div class="absolute top-0">
-                        <svg class="fill-current w-4 text-gray-500 mt-2 ml-2" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                            viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
-                                d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
-                        </svg>
-                    </div>
-                -->
-                </div>
+                <livewire:search-dropdown />
                 <div class="md:ml-4 mt-3 md:mt-0">
                     <a href="#">
                         <img src="images/avatar.png" alt="avatar" class="rounded-full w-8 h-8">
@@ -60,7 +58,7 @@
     @yield('popularMovies')
     @yield('nowPlayingMovies')
     @yield('show')
-    <script type="text/javascript" src="/resources/js/app.js"></script>
+    @livewireScripts
 </body>
 
 </html>

@@ -28,7 +28,7 @@ class MoviesController extends Controller
             ->json()["results"];
         //dump($nowPlaying);
         return view("index", [
-            "popularMovies" => $popularMovies,
+            "popularMovies" => collect($popularMovies)->take(7),
             "genres" => $genres,
             "nowPlaying" => $nowPlaying,
         ]);
