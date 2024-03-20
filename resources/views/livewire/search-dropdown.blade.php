@@ -1,7 +1,12 @@
-<div class="relative mt-3 md:mt-0">
-    <input wire:model.live="search" type="text"
+<div class="relative mt-3 md:mt-0" x-data="{ isOpen: true }" @click.away="isOpen=false">
+    <input wire:model.live="search" type="text" x-ref="search" 
+    @keydown.window="
+        if(event.keyCode == 191){
+            $refs.search.focus();
+        }
+    "
         class="bg-gray-800 text-sm rounded-full w-64 px-4 pl-2 py-1 focus:outline-none focus:shadow-outline"
-        placeholder="Search">
+        placeholder="Search" @focus="isOpen = true" @keydown="isOpen = true" @keydown.escape.window="isOpen=false">
     <!-- Loading state -->
     <div wire:loading class="absolute top-0 right-0 mr-3 mt-2 text-gray-500">
         <svg class="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -22,8 +27,8 @@
         </svg>
     </div>
 -->
-    <div class="absolute bg-gray-800 text-sm rounded w-64 mt-4">
-        @if ($searchResults->count() === 0 && strlen($search) > 3)
+    <div class="z-50 absolute bg-gray-800 text-sm rounded w-64 mt-4" x-show="isOpen">
+        @if ($searchResults->count() === 0 && strlen($search) > 2)
             <div class="px-3 py-3">
                 No Results For {{ $search }}
             </div>
@@ -39,7 +44,9 @@
                             @else
                                 <img src="{{ asset('images/default_poster.png') }}" alt="Poster" class="w-8">
                             @endif
-                            <span class="ml-4">{{ $result['title'] }} ({{date("Y" , strtotime($result['release_date']))}})</span>
+                            <span class="ml-4">{{ $result['title'] }}
+                                ({{ date('Y', strtotime($result['release_date'])) }})
+                            </span>
                         </a>
                     </li>
                 @endforeach

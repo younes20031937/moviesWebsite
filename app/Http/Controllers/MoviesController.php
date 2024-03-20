@@ -27,7 +27,7 @@ class MoviesController extends Controller
             ->get("https://api.themoviedb.org/3/movie/now_playing")
             ->json()["results"];
         //dump($nowPlaying);
-        return view("index", [
+        return view("movies.index", [
             "popularMovies" => collect($popularMovies)->take(7),
             "genres" => $genres,
             "nowPlaying" => $nowPlaying,
@@ -59,7 +59,7 @@ class MoviesController extends Controller
             ->get("https://api.themoviedb.org/3/movie/{$id}?api_key=464c162e87780355ee8852899448a1dc&append_to_response=credits,videos,images")
             ->json();
         //dump($movie);
-        return view("show", [
+        return view("movies.show", [
             "movie" => $movie,
         ]);
     }
