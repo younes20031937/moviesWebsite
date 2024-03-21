@@ -24,7 +24,7 @@
     </label>
 -->
     @include("navbar")
-    @yield('popularMovies')
+    @yield('content')
     @yield('nowPlayingMovies')
     @yield('show')
     @yield("popularActors")
