@@ -23,8 +23,15 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $avatars = [
+            'avatar1.jpg',
+            'avatar2.jpg',
+            'avatar3.jpg',
+            'avatar4.jpg'
+        ];
         return [
             'name' => fake()->name(),
+            'avatar' => 'images/avatars/' . $this->faker->randomElement($avatars),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),

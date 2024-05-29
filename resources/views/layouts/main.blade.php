@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="/resources/css/main.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
     <title>Fraja</title>
     @vite('resources/css/app.css')
     {{-- @livewireStyles --}}
@@ -23,12 +24,25 @@
         <span class="text-sm font-medium text-gray-900 ms-3 dark:text-gray-300">Switch</span>
     </label>
 -->
-    @include("navbar")
+
+@if (!in_array(Route::currentRouteName(), ['auth.login', 'auth.register']))
+        @include('navbar')
+    @endif
+    {{-- @include("navbar") --}}
     @yield('content')
     @yield('nowPlayingMovies')
     @yield('show')
     @yield("popularActors")
+    {{-- <script>
+        // Example script to toggle dark mode
+        function toggleDarkMode() {
+            document.documentElement.classList.toggle('dark');
+            // Save the preference using AJAX or form submission
+        }
+    </script> --}}
     {{-- @livewireScripts --}}
+    <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 </body>
 
 </html>

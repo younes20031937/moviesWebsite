@@ -1,8 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ActorsController;
 use App\Http\Controllers\MoviesController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,9 +25,17 @@ Route::get("/movies/{movie}", [MoviesController::class, "show"])->name("movies.s
 Route::get("/actors" , [ActorsController::class , "index"])->name("actors.index");
 Route::get("/page/{page?}" , [ActorsController::class,"actors.index"]);
 Route::get("/actors/{actor}" , [ActorsController::class , "show"])->name("actors.show");
-Route::get("/login" , function(){
-    return view("login");
-})->name("login");
-Route::get("/register" , function(){
-    return view("register");
-})->name("register");
+//login
+Route::get("/login" , [LoginController::class, "showLoginForm"])->name("auth.login");
+Route::post("/login" , [LoginController::class, "login"])->name("login");
+Route::post("/logout" , [LoginController::class, "logout"])->name("logout");
+
+//register
+Route::get("/register" , [RegisterController::class, "showRegisterForm"])->name("auth.register");
+Route::post("/register" , [RegisterController::class, "register"])->name("register");
+
+//profile :
+Route::get("/profile" , [ProfileController::class, "show"])->name("profile.show");
+Route::put("/profile" , [ProfileController::class, "update"])->name("profile.update");
+Route::put("/updatePassword" , [ProfileController::class, "updatePassword"])->name("profile.updatePassword");
+Route::delete("/deleteProfile" , [ProfileController::class, "destroy"])->name("profile.destroy");
