@@ -49,25 +49,28 @@
                                         placeholder="Email address">
                                 </div>
                                 <div class="mt-3 mb-3">
-                                    <label for="avatar" class="sr-only">Avatar</label>
-                                    <input id="avatar" name="avatar" type="file" autocomplete="avatar"
+                                    <label class="block mt-2 mb-2 text-sm font-medium text-white-900 dark:text-white"
+                                        for="file_input">Upload your image</label>
+                                    <input id="avatar" name="avatar" autocomplete="avatar"
                                         value="{{ Auth::user()->avatar }}"
-                                        class="block px-4 py-3 mt-3 mb-3 w-full text-lg placeholder-gray-500 text-black rounded-t-md border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                                        class="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                                        type="file">
+
                                 </div>
                             </div>
                             <div class="flex justify-between mt-4">
                                 <button type="submit"
-                                    class="px-4 py-2 text-lg font-semibold text-white bg-green-500 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-50">
+                                    class="px-5 py-2.5 mb-2 text-sm font-medium text-center text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 rounded-lg hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 me-2">
                                     Update Profile
                                 </button>
                                 <!-- Modal toggle -->
                                 <button data-modal-target="change-password-modal" data-modal-toggle="change-password-modal"
-                                    class="px-4 py-2 text-lg font-semibold text-white bg-red-500 rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-50"
+                                    class="px-5 py-2.5 mb-2 text-sm font-medium text-center text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 rounded-lg hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 me-2"
                                     type="button">
                                     Change Password
                                 </button>
                                 <button data-modal-target="popup-modal" data-modal-toggle="popup-modal"
-                                    class="px-4 py-2 text-lg font-semibold text-white bg-red-500 rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-50"
+                                    class="px-5 py-2.5 mb-2 text-sm font-medium text-center text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 rounded-lg hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 me-2"
                                     type="button">
                                     Delete Account
                                 </button>
@@ -157,17 +160,17 @@
                                 d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                         </svg>
                         <form action="{{ route('profile.destroy') }}" method="POST">
-                        @csrf
-                        @method("DELETE")
-                        <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to
-                            delete this account?</h3>
-                        <button data-modal-hide="popup-modal" type="submit"
-                            class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800">
-                            Yes, I'm sure
-                        </button>
-                        <button data-modal-hide="popup-modal" type="button"
-                            class="px-5 py-2.5 text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 ms-3 focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">No,
-                            cancel</button>
+                            @csrf
+                            @method('DELETE')
+                            <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to
+                                delete this account?</h3>
+                            <button data-modal-hide="popup-modal" type="submit"
+                                class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800">
+                                Yes, I'm sure
+                            </button>
+                            <button data-modal-hide="popup-modal" type="button"
+                                class="px-5 py-2.5 text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 ms-3 focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">No,
+                                cancel</button>
                         </form>
                     </div>
                 </div>
