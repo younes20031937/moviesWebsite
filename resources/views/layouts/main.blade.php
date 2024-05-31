@@ -25,14 +25,21 @@
     </label>
 -->
 
-@if (!in_array(Route::currentRouteName(), ['auth.login', 'auth.register']))
+    @if (
+        !in_array(Route::currentRouteName(), [
+            'auth.login',
+            'auth.register',
+            'users.index',
+            'users.edit',
+            'users.create',
+        ]))
         @include('navbar')
     @endif
     {{-- @include("navbar") --}}
     @yield('content')
     @yield('nowPlayingMovies')
     @yield('show')
-    @yield("popularActors")
+    @yield('popularActors')
     {{-- <script>
         // Example script to toggle dark mode
         function toggleDarkMode() {

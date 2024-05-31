@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ActorsController;
 use App\Http\Controllers\MoviesController;
@@ -39,3 +40,14 @@ Route::get("/profile" , [ProfileController::class, "show"])->name("profile.show"
 Route::put("/profile" , [ProfileController::class, "update"])->name("profile.update");
 Route::put("/updatePassword" , [ProfileController::class, "updatePassword"])->name("profile.updatePassword");
 Route::delete("/deleteProfile" , [ProfileController::class, "destroy"])->name("profile.destroy");
+
+// Route::get("/dashboard" , [AdminController::class , "index"])->name("auth.dashboard")->middleware("admin");
+Route::middleware(["admin"])->group(function(){
+    Route::get("users" , [AdminController::class, "index"])->name("users.index");
+    Route::get("users/create" , [AdminController::class, "create"])->name("users.create");
+    Route::post("users" , [AdminController::class, "store"])->name("users.store");
+    Route::get("users/{id}" , [AdminController::class, "show"])->name("users.show");
+    Route::get("users/{id}/edit",[AdminController::class, "edit"])->name("users.edit");
+    Route::put("users/{id}" , [AdminController::class, "update"])->name("users.update");
+    Route::delete("users/{id}" , [AdminController::class, "destroy"])->name("users.destroy");
+});
