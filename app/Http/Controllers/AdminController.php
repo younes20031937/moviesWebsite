@@ -3,18 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\Pagination\Paginator;
 
 class AdminController extends Controller
 {
     public function index(Request $request)
     {
+        // $users = User::all();
+        $users = User::paginate(5);
 
-            $users = User::all();
-        
-
-        return view("auth.users.index", compact("users"));
+        return view("auth.users.index", compact("users" ));
     }
     public function create()
     {
@@ -28,6 +29,12 @@ class AdminController extends Controller
             "email" => "required|unique:users,email",
             "password" => "required",
             "confirm-password" => "required|same:password",
+        ], [
+            "name" => "This field is required",
+            "avatar" => "You have to upload image like .png , .jpg or .jpeg",
+            "email" => "Email adress is required",
+            "password" => "This field is required",
+            "confirm-password" => "Confirm password to create user",
         ]);
         if ($request->hasFile("avatar")) {
             $newAvatarName = time() . "-" . $request->name . "." . $request->avatar->extension();
@@ -57,17 +64,20 @@ class AdminController extends Controller
         $request->validate([
             "avatar" => "mimes:png,jpg,jpeg",
             "email" => "unique:users,email,"  . $user->id,
+        ], [
+            "avatar" => "You have to select files as .png , .jpg or .jpeg",
+            "email" => "This email used before"
         ]);
+        $data = $request->except("avatar", "isAdmin");
+        $data["isAdmin"] = $request->has("isAdmin") ? 1 : 0;
         if ($request->hasFile("avatar")) {
             $newAvatarName = time() . "-" . $request->name . "." . $request->avatar->extension();
             $request->avatar->move(public_path("images/avatars"), $newAvatarName);
-            $data = $request->except("avatar");
             $data["avatar"] = $newAvatarName;
-            $user->update($data);
         } else {
             $data = $request->except("avatar");
-            $user->update($data);
         }
+        $user->update($data);
         return redirect()->route("users.index")->with("message", "User updated successfully");
     }
     public function destroy($id)
@@ -75,5 +85,13 @@ class AdminController extends Controller
         $user = User::findOrFail($id);
         $user->delete();
         return redirect()->route("users.index")->with("message", "User deleted successfully");
+    }
+    public function exportPdf()
+    {
+        $users = User::all();
+
+        $pdf = PDF::loadView('auth.users.pdf', compact('users'));
+
+        return $pdf->save(public_path('my_stored_file.pdf'))->stream('users.pdf');
     }
 }

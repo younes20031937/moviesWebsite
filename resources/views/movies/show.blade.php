@@ -86,7 +86,7 @@
 <div class="border-b border-gray-800 movie-cast">
     <div class="container px-4 py-16 mx-auto">
         <h2 class="text-4xl font-semibold">Cast</h2>
-        <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+        <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             @foreach ($movie['credits']['cast'] as $cast)
                 @if ($loop->index < 5)
                     <div class="mt-8">

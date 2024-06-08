@@ -50,4 +50,5 @@ Route::middleware(["admin"])->group(function(){
     Route::get("users/{id}/edit",[AdminController::class, "edit"])->name("users.edit");
     Route::put("users/{id}" , [AdminController::class, "update"])->name("users.update");
     Route::delete("users/{id}" , [AdminController::class, "destroy"])->name("users.destroy");
+    Route::get('exportUsers-pdf', [AdminController::class, "exportPdf"])->name('users.export.pdf');
 });

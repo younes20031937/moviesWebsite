@@ -22,14 +22,20 @@
                 <div class="relative mt-3 md:ml-4 md:mt-0">
                     <a href="#">
                         <img src="{{ 'images/avatars/' . Auth::user()->avatar }}" alt="avatar"
-                            class="w-8 h-8 rounded-full" id="avatar">
+                            class="w-10 h-10 rounded-full" id="avatar">
                     </a>
                     <div id="avatarDropdown"
-                        class="hidden absolute right-0 z-20 mt-2 w-48 bg-white rounded-md shadow-lg">
-                        <p class="block px-4 py-2 bg-gray-900 text-white-800">Welcome {{ Auth::user()->name }} !</p>
+                        class="hidden absolute right-0 z-20 mt-2 bg-white rounded-md shadow-lg w-55">
+                        <p class="block px-4 py-2 bg-gray-900 text-white-800">Welcome {{ Auth::user()->name }} ! <br>
+                            <span class="text-sm text-gray-400">{{ Auth::user()->email }}</span>
+                        </p>
                         <a href="{{ route('profile.show') }}"
                             class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Profile</a>
-
+                        @if (Auth::check() && Auth::user()->isAdmin)
+                            <a href="{{ route('users.index') }}" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">
+                                Dashboard
+                            </a>
+                        @endif
                         <button data-modal-target="popup-modal" data-modal-toggle="popup-modal"
                             class="px-4 py-2 w-full text-left text-gray-800 hover:bg-gray-200" type="button">
                             Logout
