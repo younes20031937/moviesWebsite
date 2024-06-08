@@ -3,7 +3,7 @@
         <ul class="flex flex-col items-center md:flex-row">
             <li>
                 <a href="{{ route('movies.index') }}">
-                    <img src="{{ asset('images/logo.png') }}" class="w-10" alt="">
+                    <img src="{{ asset('images/logo.png') }}" class="w-16" alt="">
                 </a>
             </li>
             <li class="mt-3 md:ml-16 md:mt-0">
